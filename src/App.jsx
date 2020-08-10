@@ -36,15 +36,18 @@ function App() {
 
   return (
     <div className="App">
-		<form onSubmit={changeQuery}>
-			<input type="text" 
-				value={search}
-				onChange={updateSearch}
-			/>
-			<button>Search</button>
-		</form>
+		<div className="search-form">	
+			<form onSubmit={changeQuery}>
+				<input type="text" 
+					value={search}
+					onChange={updateSearch}
+					placeholder="Search for anime..."	
+				/>
+				<button><i className="fas fa-search"/></button>
+			</form>
+		</div>		
 		<div className="anime">
-				{anime.length > 1 ? anime.map(a => (<Anime anime={a} className="card"/>)) : null}	
+				{anime.length > 1 ? anime.map(a => (<Anime anime={a} key={a.mal_id}/>)) : null}	
 		</div>		
 	</div>
   )

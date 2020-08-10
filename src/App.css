@@ -1,7 +1,86 @@
-.anime {
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.App {
+	height: 100vh;
+	width: 100vw;
+	padding: 0;
+	margin: 0;
 	display: flex;
-	flex-gap: 5px;
+	justify-content: center;
 	flex-wrap: wrap;
+	font-family: 'Roboto', sans-serif;
 }
 
+.search-form {
+	margin-top: 40px;
+	width: 100vw;
+	text-align: center;
+}
 
+.search-form input[type="text"] {
+	width: 80%;
+	border: none;
+	padding: 15px 15px;
+	font-size: 24px;
+	background: #151F2E;
+	color: #9FADBD;	
+	box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-form button {
+	border: none;
+	background: #151F2E;
+	padding: 15px;
+	font-size: 24px;
+	color: #9FADBD;
+	cursor: pointer;
+}
+
+.anime {
+	margin-top: 50px;
+	width: 100vw;
+	margin: 50px auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-gap: 100px 20px;
+	align-items: center;
+	justify-items: center;
+	padding: 10px
+}
+
+.card {
+	color: #fff;
+	position: relative;
+	cursor: pointer;
+	min-height: 314px;
+}
+
+.card:hover .sub-card {
+	opacity: 1
+}
+
+.card .main {
+	position: absolute;
+	top: 90%;
+	text-align: center;
+	width: 100%;
+	background: #20324D;
+	padding: 5px;
+	z-index: 1;
+}
+
+.card .sub-card {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	background: rgba(32, 50, 77, .8);
+	opacity: 0;
+	transition: opacity .5s ease-in-out;
+}
