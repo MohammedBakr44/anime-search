@@ -1,20 +1,21 @@
-
 import React, { useState, useEffect } from 'react'
-import './App.css'
+import './App.scss'
 import Anime from './Anime'
-
+import Card from './Card'
+import Trending from './Trending'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
  
 	const [anime, setAnime] = useState([]);
 	const [query, setQuery] = useState("");
 	const [search, setSearch] = useState("");	
 
-
 	const Zawarudo = async () => {
-		const data = await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}`);
+		//const data = await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}&genre=12?genre_exclude=1`);
+			const data = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${query}`);
 		const fetchAnime = await data.json();
-		setAnime(fetchAnime.results);
-		console.log(fetchAnime);
+		setAnime(fetchAnime.data);
+		//console.log(fetchAnime);
 	};
 
 	useEffect(() => {
@@ -35,21 +36,29 @@ function App() {
 
 
   return (
-    <div className="App">
-		<div className="search-form">	
-			<form onSubmit={changeQuery}>
-				<input type="text" 
-					value={search}
-					onChange={updateSearch}
-					placeholder="Search for anime..."	
-				/>
-				<button><i className="fas fa-search"/></button>
-			</form>
-		</div>		
-		<div className="anime">
-				{anime.length > 1 ? anime.map(a => (<Anime anime={a} key={a.mal_id}/>)) : null}	
-		</div>		
-	</div>
+	<Router>	  
+    	<div className="App">
+			<div className="search-form">	
+				<form onSubmit={changeQuery}>
+					<input type="text" 
+						value={search}
+						onChange={updateSearch}
+						placeholder="Search for anime..."	
+					/>
+					<button><i className="fas fa-search"/></button>
+				</form>
+			</div>
+				<Switch>
+						<Route path="/anime/:id" component={Anime}></Route>
+						<Route path="/trending" component={Trending}></Route>
+			<div className="anime">
+						{anime.length > 1 ? anime.map(a => (			
+								<Card anime={a} key={a.id}/>		
+						)) : null}		
+			</div>
+			</Switch>			
+		</div>
+	</Router>		
   )
 }
 

@@ -1,4 +1,7 @@
- @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$mainColor: #9FADBD;
+$mainBackground: #151F2E;
 
 .App {
 	height: 100vh;
@@ -22,17 +25,17 @@
 	border: none;
 	padding: 15px 15px;
 	font-size: 24px;
-	background: #151F2E;
-	color: #9FADBD;	
+	background: $mainBackground;
+	color: $mainColor;	
 	box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .search-form button {
 	border: none;
-	background: #151F2E;
+	background: $mainBackground;
 	padding: 15px;
 	font-size: 24px;
-	color: #9FADBD;
+	color: $mainColor;
 	cursor: pointer;
 }
 
@@ -41,18 +44,17 @@
 	width: 100vw;
 	margin: 50px auto;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	grid-gap: 100px 20px;
 	align-items: center;
 	justify-items: center;
-	padding: 10px
+	padding: 25px
 }
 
 .card {
 	color: #fff;
 	position: relative;
 	cursor: pointer;
-	min-height: 314px;
 }
 
 .card:hover .sub-card {
@@ -83,4 +85,9 @@
 	background: rgba(32, 50, 77, .8);
 	opacity: 0;
 	transition: opacity .5s ease-in-out;
+}
+
+.card a {
+	color: #fff;
+	text-decoration: none;
 }

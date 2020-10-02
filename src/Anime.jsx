@@ -1,21 +1,54 @@
-import React from 'react';
-//import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import './Anime.scss';
+function Anime({ match }) {
+	useEffect(() => {
+		Zawarudo();
+		// eslint-disable-next-line
+	}, []);
 
-const Anime = ({ anime }) => (
-		<div>
-			<div className="card">
-				<div className="main">
-					<h3>{anime.title}</h3>
+	const [anime, setAnime] = useState({});
+	const [loading, setLoading] = useState(true);
+
+	const Zawarudo = async () => {
+		const data = await fetch(
+			`https://kitsu.io/api/edge/anime/${match.params.id}`
+		);
+		const anime = await data.json();
+		console.log(anime.data);
+		setAnime(anime.data);
+		setLoading(false);
+	};
+
+	console.log(anime);
+	const atr = anime.attributes;
+
+	return (
+		<div className='Anime'>
+			{loading ? (
+				<h1>Loading...</h1>
+			) : (
+				<div>
+					<div
+						className='cover'
+						style={{
+							backgroundImage: `url('${atr.coverImage.original}')`,
+						}}
+						alt={atr.canonicalTitle}>
+						<div className='overlay'>
+							<p>{atr.synopsis}</p>
+						</div>
+					</div>
+					<div className="main">
+						<div className="poster" style={{
+							backgroundImage: `url('${atr.posterImage.medium}')`
+						}}>
+						</div>
+						<h1>{atr.canonicalTitle}</h1>
+					</div>
 				</div>
-				<div className="sub-card">
-					<p>Status: {anime.airing ? "Ongoing" : "Completed"}</p>
-					<p>Episodes: {anime.episodes}</p>
-					<p>Score: {anime.score}</p>
-				</div>
-				<img src={anime.image_url} alt={anime.title} />
-			</div> 
+			)}
 		</div>
-);
+	);
+}
 
-
-export default Anime
+export default Anime;
